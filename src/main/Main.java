@@ -3,6 +3,7 @@ package main;
 import controller.ControllerAdmin;
 import controller.ControllerAdminUserManagement;
 import controller.ControllerCustomer;
+import controller.ControllerCustomerCart;
 import controller.ControllerCustomerMenu;
 import controller.ControllerCustomerOrderQuantity;
 import controller.ControllerLogin;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 import view.ViewAdmin;
 import view.ViewAdminUserManagement;
 import view.ViewCustomer;
+import view.ViewCustomerCart;
 import view.ViewCustomerMenu;
 import view.ViewCustomerOrderQuantity;
 import view.ViewLogin;
@@ -39,6 +41,10 @@ public class Main extends Application {
         // LOGIN
          ViewLogin vl = new ViewLogin(primaryStage);
          ControllerLogin cl = new ControllerLogin(vl, null);
+    	
+//    	ViewCustomerCart vcc = new ViewCustomerCart(primaryStage);
+//    	ControllerCustomerCart ccc = new ControllerCustomerCart(vcc, null);
+    	
 
         // ViewCustomerMenu dan ControllerCustomer
 //        ViewCustomerMenu vcm = new ViewCustomerMenu(primaryStage);

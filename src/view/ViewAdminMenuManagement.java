@@ -37,7 +37,7 @@ public class ViewAdminMenuManagement {
 		root.getChildren().addAll(table, form);
 		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		
-		scene = new Scene(root, 800, 600);
+		scene = new Scene(root, 500, 500);
 		stage.setScene(scene);
 		stage.setTitle("Mystic Grills - Menu Management");
 		stage.setResizable(false);

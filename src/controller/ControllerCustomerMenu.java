@@ -4,14 +4,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import model.ModelMenu;
+import model.ModelOrder;
 import view.ViewCustomer;
+import view.ViewCustomerCart;
 import view.ViewCustomerMenu;
 import view.ViewCustomerOrderQuantity;
 
 public class ControllerCustomerMenu {
 	private static ViewCustomerMenu vcm;
 	
-	private static ObservableList<ModelMenu> menus = FXCollections.observableArrayList();
+	private static ObservableList<ModelMenu> menus 		= FXCollections.observableArrayList();
+	private static ObservableList<ModelOrder> orders 	= FXCollections.observableArrayList();
 	
 	public ControllerCustomerMenu(ViewCustomerMenu view, ObservableList<ModelMenu> menus) {
 	    this.vcm 	= view;
@@ -27,7 +30,7 @@ public class ControllerCustomerMenu {
 	
 	void setButtonListener() {
 		vcm.getBackBtn().setOnAction(e -> handleBack());
-		vcm.getAddBtn().setOnAction(e -> handleCart());
+		vcm.getViewBtn().setOnAction(e -> handleCart());
 	}
 	
 	void handleBack() {
@@ -37,15 +40,24 @@ public class ControllerCustomerMenu {
 		
 		vcm.getScene().getWindow().hide();
 		stage.show();
+	}			
+	
+	void handleCart() {
+		Stage stage 				= new Stage();
+		ViewCustomerCart vcc		= new ViewCustomerCart(stage);
+		ControllerCustomerCart ccc 	= new ControllerCustomerCart(vcc, null);
+		
+		vcm.getScene().getWindow().hide();
+		stage.show();
 	}
 	
-	public static void handleCart() {
-	    ModelMenu selectedMenu = vcm.getTable().getSelectionModel().getSelectedItem();
-	    Stage stage = new Stage();
-        ViewCustomerOrderQuantity vcoq = new ViewCustomerOrderQuantity(stage);
-        ControllerCustomerOrderQuantity ccoq = new ControllerCustomerOrderQuantity(vcoq, menus, selectedMenu);
-
+	public static void handleCart(ModelMenu rowData) {
+        vcm.getAddBtn().setOnAction(e -> handleCart(rowData));
         vcm.getScene().getWindow();
+        ModelMenu selectedMenu 					= vcm.getTable().getSelectionModel().getSelectedItem();
+	    Stage stage 							= new Stage();
+        ViewCustomerOrderQuantity vcoq 			= new ViewCustomerOrderQuantity(stage, rowData);
+        ControllerCustomerOrderQuantity ccoq 	= new ControllerCustomerOrderQuantity(vcoq, orders, null, null);
         stage.show();
 	}
 }

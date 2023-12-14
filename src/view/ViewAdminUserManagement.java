@@ -3,6 +3,7 @@ package view;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -18,7 +19,8 @@ public class ViewAdminUserManagement {
 	private Scene scene;
 	private TableView<ModelUser> table;
 
-	private TextField roleTF	= new TextField();
+	private ComboBox<String> roleTF = new ComboBox<>();
+	
 	private TextField nameTF 	= new TextField();
 	private TextField emailTF 	= new TextField();
 
@@ -37,7 +39,7 @@ public class ViewAdminUserManagement {
 		root.getChildren().addAll(table, form);
 		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-		scene = new Scene(root, 800, 600);
+		scene = new Scene(root, 500, 500);
 		stage.setScene(scene);
 		stage.setTitle("Mystic Grills - User Management");
 		stage.setResizable(false);
@@ -67,7 +69,8 @@ public class ViewAdminUserManagement {
 		GridPane form = new GridPane();
 		form.setVgap(20);
 		form.setHgap(10);
-
+		
+		roleTF.getItems().addAll("Admin", "Chef", "Waiter", "Cashier", "Customer");
 		form.add(new Label("Role:"), 0, 0);
 		form.add(roleTF, 1, 0);
 		form.add(new Label("Name:"), 0, 1);
@@ -103,12 +106,12 @@ public class ViewAdminUserManagement {
 		this.table = table;
 	}
 
-	public TextField getRoleTF() {
-		return roleTF;
+	public ComboBox<String> getRoleCB() {
+	    return roleTF;
 	}
 
-	public void setRoleTF(TextField roleTF) {
-		this.roleTF = roleTF;
+	public void setRoleCB(ComboBox<String> roleCB) {
+	    this.roleTF = roleCB;
 	}
 
 	public TextField getNameTF() {

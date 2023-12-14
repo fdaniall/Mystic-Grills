@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -12,169 +13,164 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.ModelMenu;
 import model.ModelUser;
 
 public class ViewCustomerOrderQuantity {
-	Scene scene;
-	private TableView<ModelMenu> table;
+    Scene scene;
+    private TableView<ModelMenu> table;
 
-	private Label titleLB 		= new Label("Order Quantity");
-	private Label nameLB		= new Label("Menu Name: ");
-	private Label quantityLB	= new Label("Quantity: ");
+    private Label titleLB         	= new Label("Order Quantity");
+    private Label nameLB          	= new Label("Menu Name: ");
+    private Label quantityLB      	= new Label("Quantity: ");
+    
+    private GridPane gridCont      	= new GridPane();
+    private BorderPane borderCont	= new BorderPane();
 
-	private TextField nameTF		= new TextField();
-	private TextField quantityTF	= new TextField();
-	
-	private GridPane gridCont 		= new GridPane();
-	private BorderPane borderCont 	= new BorderPane();
-	
-	private HBox buttonBox		= new HBox(10);
-	private Button saveBtn		= new Button("Save");
-	private Button cancelBtn	= new Button("Cancel");
-	
-	private void init() {
-		buttonBox.getChildren().addAll(saveBtn, cancelBtn);
-		
-		borderCont.setTop(titleLB);
-		borderCont.setCenter(gridCont);
-		borderCont.setBottom(buttonBox);
-		
-		gridCont.add(nameLB, 0, 0);
+    private HBox buttonBox			= new HBox(10);
+    private Button saveBtn     		= new Button("Add To Cart");
+    private Button cancelBtn    	= new Button("Cancel");
+    private TextField nameTF;
+    private Spinner<Integer> quantityTF;
+
+    private void init(ModelMenu rowData) {
+        buttonBox.getChildren().addAll(saveBtn, cancelBtn);
+
+        nameTF   	= new TextField(rowData.getMenuItemName());
+        quantityTF	= new Spinner<>(1, Integer.MAX_VALUE, 1);
+        quantityTF.getValueFactory().setValue(1);
+        quantityTF.setEditable(true);
+
+        borderCont.setTop(titleLB);
+        borderCont.setCenter(gridCont);
+        borderCont.setBottom(buttonBox);
+
+        gridCont.add(nameLB, 0, 0);
         gridCont.add(nameTF, 1, 0);
         nameTF.setDisable(true);
         gridCont.add(quantityLB, 0, 1);
         gridCont.add(quantityTF, 1, 1);
-		
-		BorderPane.setAlignment(titleLB, Pos.CENTER);
-		BorderPane.setAlignment(gridCont, Pos.CENTER);
-		buttonBox.setAlignment(Pos.CENTER);
-		
-		BorderPane.setMargin(titleLB, new Insets(10));
-		BorderPane.setMargin(gridCont, new Insets(10));
-		BorderPane.setMargin(buttonBox, new Insets(10));
-		
-		gridCont.setAlignment(Pos.CENTER);
-		gridCont.setVgap(10);
-		
-		titleLB.setFont(new Font("Copperplate Gothic Bold", 20));
 
-		scene = new Scene(borderCont, 350, 200);
-	}
-	
-	public void setMenuDetails(String menuName, int quantity) {
-		nameTF.setText(menuName);
-        quantityTF.setText("1");
+        BorderPane.setAlignment(titleLB, Pos.CENTER);
+        BorderPane.setAlignment(gridCont, Pos.CENTER);
+        buttonBox.setAlignment(Pos.CENTER);
+
+        BorderPane.setMargin(titleLB, new Insets(10));
+        BorderPane.setMargin(gridCont, new Insets(10));
+        BorderPane.setMargin(buttonBox, new Insets(10));
+
+        gridCont.setAlignment(Pos.CENTER);
+        gridCont.setVgap(10);
+
+        titleLB.setFont(new Font("Copperplate Gothic Bold", 20));
+
+        scene = new Scene(borderCont, 350, 200);
     }
-	
-	public ViewCustomerOrderQuantity(Stage stage) {
-		
-		init();
-		this.setMenuDetails(null, 0);
-		
-		stage.setScene(scene);
-		stage.setTitle("Mystic Grills - Order Quantity");
-		stage.setResizable(false);
-		stage.show();
-	}
-	
 
-	public TableView<ModelMenu> getTable() {
-		return table;
-	}
+    public ViewCustomerOrderQuantity(Stage stage, ModelMenu rowData) {
+        init(rowData);
 
-	public void setTable(TableView<ModelMenu> table) {
-		this.table = table;
-	}
+        stage.setScene(scene);
+        stage.setTitle("Mystic Grills - Order Quantity");
+        stage.setResizable(false);
+        stage.show();
+    }
 
-	public HBox getButtonBox() {
-		return buttonBox;
-	}
+    public TableView<ModelMenu> getTable() {
+        return table;
+    }
 
-	public void setButtonBox(HBox buttonBox) {
-		this.buttonBox = buttonBox;
-	}
+    public void setTable(TableView<ModelMenu> table) {
+        this.table = table;
+    }
 
-	public Button getSaveBtn() {
-		return saveBtn;
-	}
+    public HBox getButtonBox() {
+        return buttonBox;
+    }
 
-	public void setSaveBtn(Button saveBtn) {
-		this.saveBtn = saveBtn;
-	}
+    public void setButtonBox(HBox buttonBox) {
+        this.buttonBox = buttonBox;
+    }
 
-	public Button getCancelBtn() {
-		return cancelBtn;
-	}
+    public Button getSaveBtn() {
+        return saveBtn;
+    }
 
-	public void setCancelBtn(Button cancelBtn) {
-		this.cancelBtn = cancelBtn;
-	}
+    public void setSaveBtn(Button saveBtn) {
+        this.saveBtn = saveBtn;
+    }
 
-	public Scene getScene() {
-		return scene;
-	}
+    public Button getCancelBtn() {
+        return cancelBtn;
+    }
 
-	public void setScene(Scene scene) {
-		this.scene = scene;
-	}
+    public void setCancelBtn(Button cancelBtn) {
+        this.cancelBtn = cancelBtn;
+    }
 
-	public Label getTitleLB() {
-		return titleLB;
-	}
+    public Scene getScene() {
+        return scene;
+    }
 
-	public void setTitleLB(Label titleLB) {
-		this.titleLB = titleLB;
-	}
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
 
-	public Label getNameLB() {
-		return nameLB;
-	}
+    public Label getTitleLB() {
+        return titleLB;
+    }
 
-	public void setNameLB(Label nameLB) {
-		this.nameLB = nameLB;
-	}
+    public void setTitleLB(Label titleLB) {
+        this.titleLB = titleLB;
+    }
 
-	public Label getQuantityLB() {
-		return quantityLB;
-	}
+    public Label getNameLB() {
+        return nameLB;
+    }
 
-	public void setQuantityLB(Label quantityLB) {
-		this.quantityLB = quantityLB;
-	}
+    public void setNameLB(Label nameLB) {
+        this.nameLB = nameLB;
+    }
 
-	public TextField getNameTF() {
-		return nameTF;
-	}
+    public Label getQuantityLB() {
+        return quantityLB;
+    }
 
-	public void setNameTF(TextField nameTF) {
-		this.nameTF = nameTF;
-	}
+    public void setQuantityLB(Label quantityLB) {
+        this.quantityLB = quantityLB;
+    }
 
-	public TextField getQuantityTF() {
-		return quantityTF;
-	}
+    public TextField getNameTF() {
+        return nameTF;
+    }
 
-	public void setQuantityTF(TextField quantityTF) {
-		this.quantityTF = quantityTF;
-	}
+    public void setNameTF(TextField nameTF) {
+        this.nameTF = nameTF;
+    }
 
-	public GridPane getGridCont() {
-		return gridCont;
-	}
+    public Spinner<Integer> getQuantityTF() {
+        return quantityTF;
+    }
 
-	public void setGridCont(GridPane gridCont) {
-		this.gridCont = gridCont;
-	}
+    public void setQuantityTF(Spinner<Integer> quantityTF) {
+        this.quantityTF = quantityTF;
+    }
 
-	public BorderPane getBorderCont() {
-		return borderCont;
-	}
+    public GridPane getGridCont() {
+        return gridCont;
+    }
 
-	public void setBorderCont(BorderPane borderCont) {
-		this.borderCont = borderCont;
-	}
+    public void setGridCont(GridPane gridCont) {
+        this.gridCont = gridCont;
+    }
+
+    public BorderPane getBorderCont() {
+        return borderCont;
+    }
+
+    public void setBorderCont(BorderPane borderCont) {
+        this.borderCont = borderCont;
+    }
 }

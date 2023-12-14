@@ -74,8 +74,7 @@ public class ViewCustomerMenu{
 		    {
 		        addButton.setOnAction(event -> {
 		            ModelMenu rowData = getTableView().getItems().get(getIndex());
-		            // Panggil metode atau kirim event ke Controller di sini
-		            ControllerCustomerMenu.handleCart();
+		            ControllerCustomerMenu.handleCart(rowData);
 		        });
 		    }
 		    @Override

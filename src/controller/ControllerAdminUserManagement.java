@@ -22,7 +22,7 @@ public class ControllerAdminUserManagement {
 	private void setupTableSelectionListener() {
 		vaum.getTable().getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			if (newSelection != null) {
-				vaum.getRoleTF().setText(newSelection.getUserRole());
+				vaum.getRoleCB().setValue(newSelection.getUserRole());
 				vaum.getNameTF().setText(newSelection.getUserName());
 				vaum.getEmailTF().setText(newSelection.getUserEmail());
 			}
@@ -36,7 +36,7 @@ public class ControllerAdminUserManagement {
 	}
 	
 	void handleInsert() {
-		String userRole		= vaum.getRoleTF().getText();
+		String userRole		= vaum.getRoleCB().getValue();
 		String userName 	= vaum.getNameTF().getText();
 		String userEmail 	= vaum.getEmailTF().getText();
 		for (ModelUser user : users) {
@@ -56,7 +56,7 @@ public class ControllerAdminUserManagement {
 	}
 
 	void handleUpdate() {
-		String userRole		= vaum.getRoleTF().getText();
+		String userRole		= vaum.getRoleCB().getValue();
 		String userName 	= vaum.getNameTF().getText();
 		String userEmail 	= vaum.getEmailTF().getText();
 		ModelUser.updateUser(userRole, userName, userEmail);
