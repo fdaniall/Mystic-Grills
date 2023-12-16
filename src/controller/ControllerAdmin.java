@@ -53,13 +53,4 @@ public class ControllerAdmin {
 		va.getUserBtn().setOnAction(e -> handleUser());
 		va.getExitBtn().setOnAction(e -> handleExit());
 	}
-	
-//	public void goAdmin() {
-//		Stage stage = new Stage();
-//	    ViewAdmin va = new ViewAdmin(stage);
-//	    ControllerAdmin ca = new ControllerAdmin(va);
-//
-//	    va.getScene().getWindow().hide();
-//	    stage.show();
-//	}
 }

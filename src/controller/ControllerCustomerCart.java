@@ -30,12 +30,6 @@ public class ControllerCustomerCart {
 		setButtonListener();
 	}
 	
-//	void loadTableData(String menuItemName, int quantity) {
-//		orders.clear();
-//		orders.addAll(ModelOrder.getOrder(menuItemName, quantity));
-//		vcc.getTable().setItems(orders);
-//	}
-	
 	void loadTableData() {
 		orders.clear();
 //		orders.addAll(ModelOrder.getOrder(orderList));
@@ -43,10 +37,6 @@ public class ControllerCustomerCart {
 	}
 
 	void handleSave(){
-//		for (String item : vcc.getCart()) {
-//            System.out.println("Item in cart: " + item);
-//            // Lakukan logika lain sesuai kebutuhan
-//        }
 		System.out.println("ini save");
 	}
 

@@ -32,7 +32,7 @@ public class ControllerCustomer {
 	//user
 	void handleCart() {
 		Stage stage = new Stage();
-		ViewCustomerCart vaum 		= new ViewCustomerCart(stage);
+		ViewCustomerCart vaum 		= new ViewCustomerCart(stage, null);
 		ControllerCustomerCart cl	= new ControllerCustomerCart(vaum, null);
 
 		va.getScene().getWindow().hide();

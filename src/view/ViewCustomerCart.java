@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -26,38 +27,40 @@ import model.ModelUser;
 public class ViewCustomerCart {
 
 	Scene scene;
-	
+
 	private TableView<ModelOrder> table;
-	
+
 	private static ObservableList<ModelOrder> orders = FXCollections.observableArrayList();
-    private static ArrayList<String> cartTemp = new ArrayList<>();
-    private static int orderId = 1;
-	
+	private static ArrayList<String> cartTemp = new ArrayList<>();
+	private static int orderId = 1;
+
 	private BorderPane borderCont		= new BorderPane();
 	private HBox buttonBox 				= new HBox(10);
 	private Button checkoutBtn			= new Button("Checkout");
 	private Button cancelBtn			= new Button("Cancel");
-	
+
 	public static TableView<ModelOrder> createMenuOrder() {
-        TableView<ModelOrder> table = new TableView<>();
+		TableView<ModelOrder> table = new TableView<>();
 
-        TableColumn<ModelOrder, String> nameColumn = new TableColumn<>("Menu Name");
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("menuItemName"));
+		TableColumn<ModelOrder, String> nameColumn = new TableColumn<>("Menu Name");
+		nameColumn.setCellValueFactory(data ->
+		new SimpleStringProperty(data.getValue().getMenuItemName())
+				);
 
-        TableColumn<ModelOrder, Number> quantityColumn = new TableColumn<>("Quantity");
-        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+		TableColumn<ModelOrder, Number> quantityColumn = new TableColumn<>("Quantity");
+		quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
-        table.getColumns().add(nameColumn);
-        table.getColumns().add(quantityColumn);
+		table.getColumns().add(nameColumn);
+		table.getColumns().add(quantityColumn);
 
-        table.setItems(orders); // Setel item pada pesanan yang sudah ada
+		table.setItems(orders);
 
-        return table;
-    }
-	
-	public ViewCustomerCart(Stage stage) {
+		return table;
+	}
+
+	public ViewCustomerCart(Stage stage, ObservableList<ModelOrder> orders) {
 		VBox root = new VBox();
-		
+
 		table = createMenuOrder();
 		buttonBox.getChildren().addAll(checkoutBtn, cancelBtn);
 		HBox.setMargin(checkoutBtn, new Insets(50, 50, 50, 50));
@@ -66,22 +69,24 @@ public class ViewCustomerCart {
 		checkoutBtn.setPrefWidth(200);
 		cancelBtn.setPrefHeight(100);
 		cancelBtn.setPrefWidth(200);
-		
+
 		checkoutBtn.setFont(new Font("Arial", 15));
 		cancelBtn.setFont(new Font("Arial", 15));
-		
+
 		root.getChildren().addAll(table, buttonBox);
 		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		buttonBox.setAlignment(Pos.CENTER);
-        
-	    scene = new Scene(root, 500, 500);
-	        
-	    stage.setScene(scene);
-	    stage.setTitle("Mystic Grills - Cart");
-	    stage.setResizable(false);
-	    stage.show();
-    }
-	
+
+		scene = new Scene(root, 500, 500);
+
+		table.setItems(orders);
+		
+		stage.setScene(scene);
+		stage.setTitle("Mystic Grills - Cart");
+		stage.setResizable(false);
+		stage.show();
+	}
+
 	public TableView<ModelOrder> getTable() {
 		return table;
 	}

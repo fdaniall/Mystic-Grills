@@ -44,7 +44,7 @@ public class ControllerCustomerMenu {
 	
 	void handleCart() {
 		Stage stage 				= new Stage();
-		ViewCustomerCart vcc		= new ViewCustomerCart(stage);
+		ViewCustomerCart vcc		= new ViewCustomerCart(stage, null);
 		ControllerCustomerCart ccc 	= new ControllerCustomerCart(vcc, null);
 		
 		vcm.getScene().getWindow().hide();

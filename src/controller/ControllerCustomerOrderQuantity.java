@@ -41,15 +41,7 @@ public class ControllerCustomerOrderQuantity {
     	System.out.println("Menu Name	: " + newOrder.getMenuItemName());
     	System.out.println("Quantity	: " + newOrder.getQuantity());
     	
-//    	for (ModelOrder order : orderList) {
-//    	    System.out.println("Menu Name: " + order.getMenuItemName());
-//    	    System.out.println("Quantity : " + order.getQuantity());
-//    	    System.out.println("---");
-//    	}
-    	
-//    	ControllerCustomerCart.loadTableData(menuName, quantity);
     	ModelOrder.getOrder(orderList);
-//    	ModelOrder.cartTemp(menuName, quantity);
     	vcoq.getScene().getWindow().hide();
     }
     

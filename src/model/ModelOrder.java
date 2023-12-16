@@ -1,21 +1,18 @@
 package model;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import database.Connect;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class ModelOrder {
-	private static String orderId;
+	private String orderId;
 	private String menuItemName;
 	private int quantity;
 
 	private static ArrayList<String> cartArray = new ArrayList<>();
+	private static ArrayList<ModelOrder> orders = new ArrayList<>();
 
 	public ModelOrder(String orderId, String menuItemName, int quantity) {
 		super();
@@ -24,14 +21,16 @@ public class ModelOrder {
 		this.quantity 		= quantity;
 	}
 
-	public static void getOrder(ArrayList<ModelOrder> orderList) {
+	public static ArrayList<ModelOrder> getOrder(ArrayList<ModelOrder> orderList) {
+		ArrayList<ModelOrder> orders = new ArrayList<>();
 		System.out.println("===== BATAS AWAL getOrder =====");
-		
 		for (ModelOrder order : orderList) {
 		    System.out.println("Menu Name: " + order.getMenuItemName());
 		    System.out.println("Quantity : " + order.getQuantity());
-		    System.out.println("---");
+	        orders.add(order);
 		}
+		System.out.println("===== BATAS AKHIR getOrder =====");
+		return orderList;
 	}
 
 	public static void cartTemp(String menuItemName, int quantity) {
@@ -56,6 +55,15 @@ public class ModelOrder {
 		alert.setHeaderText(null);
 		alert.setContentText(message);
 		alert.showAndWait();
+	}
+	
+	
+	public static ArrayList<ModelOrder> getOrders() {
+		return orders;
+	}
+
+	public static void setOrders(ArrayList<ModelOrder> orders) {
+		ModelOrder.orders = orders;
 	}
 
 	public String getOrderId() {
@@ -89,6 +97,4 @@ public class ModelOrder {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
-	
 }
