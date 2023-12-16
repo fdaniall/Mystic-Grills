@@ -26,29 +26,34 @@ import model.ModelUser;
 public class ViewCustomerCart {
 
 	Scene scene;
+	
 	private TableView<ModelOrder> table;
 	
-	private static ArrayList<String> cartTemp = new ArrayList<>();
+	private static ObservableList<ModelOrder> orders = FXCollections.observableArrayList();
+    private static ArrayList<String> cartTemp = new ArrayList<>();
+    private static int orderId = 1;
 	
 	private BorderPane borderCont		= new BorderPane();
 	private HBox buttonBox 				= new HBox(10);
 	private Button checkoutBtn			= new Button("Checkout");
 	private Button cancelBtn			= new Button("Cancel");
 	
-	private TableView<ModelOrder> createMenuOrder(){
-		TableView<ModelOrder> table = new TableView<>();
+	public static TableView<ModelOrder> createMenuOrder() {
+        TableView<ModelOrder> table = new TableView<>();
 
-		TableColumn<ModelOrder, String> nameColumn = new TableColumn<>("Menu Name");
-		nameColumn.setCellValueFactory(new PropertyValueFactory<>("menuItemName"));
+        TableColumn<ModelOrder, String> nameColumn = new TableColumn<>("Menu Name");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("menuItemName"));
 
-		TableColumn<ModelOrder, Number> quantityColumn = new TableColumn<>("Quantity");
-		quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        TableColumn<ModelOrder, Number> quantityColumn = new TableColumn<>("Quantity");
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
-		table.getColumns().add(nameColumn);
-		table.getColumns().add(quantityColumn);
+        table.getColumns().add(nameColumn);
+        table.getColumns().add(quantityColumn);
 
-		return table;
-	}
+        table.setItems(orders); // Setel item pada pesanan yang sudah ada
+
+        return table;
+    }
 	
 	public ViewCustomerCart(Stage stage) {
 		VBox root = new VBox();

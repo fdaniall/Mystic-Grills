@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import model.ModelMenu;
 import model.ModelUser;
 import view.ViewCustomer;
+import view.ViewCustomerCart;
 import view.ViewCustomerMenu;
 import view.ViewLogin;
 
@@ -29,14 +30,14 @@ public class ControllerCustomer {
 		stage.show();
 	}
 	//user
-//	void handleCart() {
-//		Stage stage = new Stage();
-//		ViewAdminUserManagement vaum 		= new ViewAdminUserManagement(stage);
-//		ControllerAdminUserManagement cl 	= new ControllerAdminUserManagement(vaum, users);
-//
-//		va.getScene().getWindow().hide();
-//		stage.show();
-//	}
+	void handleCart() {
+		Stage stage = new Stage();
+		ViewCustomerCart vaum 		= new ViewCustomerCart(stage);
+		ControllerCustomerCart cl	= new ControllerCustomerCart(vaum, null);
+
+		va.getScene().getWindow().hide();
+		stage.show();
+	}
 	//exit
 	void handleExit() {
 		Stage stage 		= new Stage();
@@ -49,7 +50,7 @@ public class ControllerCustomer {
 	
 	private void setButtonListener() {
 		va.getMenuBtn().setOnAction(e -> handleMenu());
-//		va.getCartBtn().setOnAction(e -> handleUser());
+		va.getCartBtn().setOnAction(e -> handleCart());
 		va.getExitBtn().setOnAction(e -> handleExit());
 	}
 }

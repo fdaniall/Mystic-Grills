@@ -16,21 +16,29 @@ public class ControllerCustomerCart {
 	private static ViewCustomerMenu vcm;
 	
 	private ObservableList<ModelOrder> orders = FXCollections.observableArrayList();
-	private ArrayList<String> cartTemp = new ArrayList<>();
-
+	private ArrayList<String> cartTemp 		= new ArrayList<>();
 	
+	String menuItemName = "di controller";
+	int quantity = 3;
 	
 	public ControllerCustomerCart(ViewCustomerCart vcc, ArrayList<String> cartTemp) {
 		super();
 		this.vcc 		= vcc;
 		this.cartTemp 	= cartTemp;
 		
+		loadTableData();
 		setButtonListener();
 	}
 	
+//	void loadTableData(String menuItemName, int quantity) {
+//		orders.clear();
+//		orders.addAll(ModelOrder.getOrder(menuItemName, quantity));
+//		vcc.getTable().setItems(orders);
+//	}
+	
 	void loadTableData() {
 		orders.clear();
-		orders.addAll(ModelOrder.loadOrder());
+//		orders.addAll(ModelOrder.getOrder(orderList));
 		vcc.getTable().setItems(orders);
 	}
 
@@ -39,7 +47,7 @@ public class ControllerCustomerCart {
 //            System.out.println("Item in cart: " + item);
 //            // Lakukan logika lain sesuai kebutuhan
 //        }
-		System.out.println("test");
+		System.out.println("ini save");
 	}
 
 	void handleCancel(){
